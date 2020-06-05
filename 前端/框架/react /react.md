@@ -314,3 +314,7 @@ React Diff
 
 （https://zhuanlan.zhihu.com/p/20346379）（https://segmentfault.com/a/1190000017039293）
 
+29. React挂载的时候有3个组件，textComponent、composeComponent、domComponent，区别和关系，Dom结构发生变化时怎么区分data的变化，怎么更新，更新怎么调度，如果更新的时候还有其他任务存在怎么处理
+30. key主要是解决哪一类的问题，为什么不建议用索引index（重绘）
+30. Redux中异步的请求怎么处理
+31. state是怎么注入到组件的，从reducer到组件经历了什么样的过程
