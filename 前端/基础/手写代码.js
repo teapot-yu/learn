@@ -22,6 +22,7 @@ https://juejin.im/post/5b0b9b9051882515773ae714
 10. 深拷贝实现
 
 11. Promise实现
+（https://github.com/YvetteLau/Blog/issues/2）
 
 13. 发布订阅模式实现
 
@@ -35,4 +36,8 @@ https://juejin.im/post/5b0b9b9051882515773ae714
 
 18. 手写ajax
 
+19. parseURL方法
+
+
 */
+
