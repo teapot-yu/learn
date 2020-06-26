@@ -2,6 +2,8 @@
 
 1. 函数柯里化
 （http://www.qiutianaimeili.com/html/page/2019/05/54g0vvxycyg.html）
+
+
 2. componse 方法实现
 
 3. 偏函数实现
@@ -16,8 +18,10 @@
 
 8. new 关键字
 
+
 9. instanceof
 https://juejin.im/post/5b0b9b9051882515773ae714
+
 
 10. 深拷贝实现
 
