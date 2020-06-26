@@ -1,3 +1,14 @@
-1. 介绍观察者模式
-2. 介绍中介者模式
-3. 观察者和订阅-发布的区别，各自用在哪里
+## 观察者模式
+
+const Events = function() {
+  let eventMap = {}
+  const listen = function(eventName, fn) {
+    if (eventmap[eventName]) {
+      eventmap[eventName].push(fn)
+    } else {
+      eventmap[eventName] = [fn]
+    }
+  }
+  const on = function(eventName)
+}
+## 订阅-发布
