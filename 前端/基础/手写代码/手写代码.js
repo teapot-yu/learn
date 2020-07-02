@@ -18,7 +18,6 @@
 
 8. new 关键字
 
-
 9. instanceof
 https://juejin.im/post/5b0b9b9051882515773ae714
 
@@ -41,7 +40,6 @@ https://juejin.im/post/5b0b9b9051882515773ae714
 18. 手写ajax
 
 19. parseURL方法
-
 
 */
 

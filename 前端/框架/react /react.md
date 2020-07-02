@@ -38,10 +38,11 @@ React 从来没有说过 “React 比原生操作 DOM 快”。React 给我们�
 
 简单总结来说虚拟DOM本质上是JavaScript对象,是对真实DOM的抽象，状态变更时，找出新树和旧树的差异，最后把差异更新到真正的dom中。
 
-## 当渲染一个列表时，何为 key？设置 key 的目的是什么
-Key 会有助于 React 识别哪些 items 改变了，被添加了或者被移除了。
+## 当渲染一个列表时，何为 key？设置 key 的目的是什么？
+这里需要先了解react对三种情况的不同处理，比如说我们现在有一个数组里面有三个值[1, 2, 3],渲染出一个列表，如说我们删除中间的2，没有key的情况下，会认为2被替换成了3，而将3删除，因为react diff在对比两个虚拟dom时会先对比key，然后对比组件类型，没有key时，key对比为null === null，且类型相同，所以2会被复用，而不是删除，在对比3的时候发现没有了，则直接删除。
+以index作为key跟上述情况是一样的。
+但是以唯一id作为key，因为没有key === 2的值，所以会直接将2删除。
 
-很多时候你会使用数据中的 IDs 作为 keys，当你没有稳定的 IDs 用于被渲染的 items 时，可以使用项目索引作为渲染项的 key，但这种方式并不推荐，如果 items 可以重新排序，就会导致 re-render 变慢。
 
 ## React最新的生命周期是怎样的?
 React 16之后有三个生命周期被废弃(但并未删除)
@@ -212,17 +213,22 @@ try {
 可见，事件处理函数是直接调用的，并没有指定调用的组件，所以不进行手动绑定的情况下直接获取到的 this是不准确的，所以我们需要手动将当前组件绑定到 this上。
 
 ## react-hooks
-
+https://juejin.im/post/5dbbdbd5f265da4d4b5fe57d#heading-34
 (https://github.com/brickspert/blog/issues/26)
 
 #### react hooks 解决了什么问题？
-React Hooks 要解决的问题是状态共享，是继 render-props 和 higher-order components 之后的第三种状态共享方案，不会产生 JSX 嵌套地狱问题。状态共享可能描述的不恰当，称为状态逻辑复用会更恰当，因为只共享数据处理逻辑，不会共享数据本身。
+1. 状态逻辑难复用： 在组件之间复用状态逻辑很难，可能要用到 render props （渲染属性）或者 HOC（高阶组件），但无论是渲染属性，还是高阶组件，都会在原先的组件外包裹一层父容器（一般都是 div 元素），导致层级冗余
+
+2. 趋向复杂难以维护：在生命周期函数中混杂不相干的逻辑（如：在 componentDidMount 中注册事件以及其他的逻辑，在 componentWillUnmount 中卸载事件，这样分散不集中的写法，很容易写出 bug ），类组件中到处都是对状态的访问和处理，导致组件难以拆分成更小的组件
+
+3. this 指向问题：父组件给子组件传递函数时，必须绑定 this
 
 #### react hooks 的优势
-相比其他几种方案，React Hooks 带来的好处不仅是 “更FP，更新粒度更细，代码更清晰”，还有如下三个特性：
-1. 多个状态不会产生嵌套，写法还是平铺的（renderProps 可以通过 compose 解决，可不但使用略为繁琐，而且因为强制封装一个新对象而增加了实体数量）。
-2. Hooks 可以引用其他 Hooks。
-3. 更容易将组件的 UI 与状态分离。
+
+1. 能优化类组件的三大问题
+2. 能在无需修改组件结构的情况下复用状态逻辑（自定义 Hooks ）
+3. 能将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）
+4. 副作用的关注点分离：副作用指那些没有发生在数据向视图转换过程中的逻辑，如 ajax 请求、访问原生dom 元素、本地持久化缓存、绑定/解绑事件、添加订阅、设置定时器、记录日志等。以往这些副作用都是写在类组件生命周期函数中的。而 useEffect 在全部渲染完毕后才会执行，useLayoutEffect 会在浏览器 layout 之后，painting 之前执行。
 
 #### 为什么请求放在useEffect里，放在外面和放里面有什么区别？
 
@@ -233,6 +239,7 @@ React Hooks 要解决的问题是状态共享，是继 render-props 和 higher-o
 memoizedState 数组是按 hook定义的顺序来放置数据的，如果 hook 顺序变化，memoizedState 并不会感知到。
 
 #### 在useEffect里想使用async/await怎么用?
+
 effect hook 要求要么什么都不返回，要么返回一个清理函数。如果需要使用，我们需要在 useEffect 内部，定义一个单独的 async 函数。
 
 #### 谈了谈useLayoutEffect和useEffect具体执行时机
@@ -307,6 +314,9 @@ React 的StrictMode是一种辅助组件，可以帮助咱们编写更好的 rea
 
 ##  React有哪些优化性能是手段?
 性能优化的手段很多时候是通用的详情见前端性能优化加载篇
+
+## ssr实现原理
+https://juejin.im/post/5d7deef6e51d453bb13b66cd#heading-19
 
 #### React diff原理
 
