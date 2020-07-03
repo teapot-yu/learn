@@ -1,16 +1,6 @@
-/**
- * 判断质数
-  https://www.jianshu.com/p/0ff11ac83cae
-**/
-
-function isPrime(number) {
-  if (number < 3) {
-    return true
+function gcb(a, b) {
+  if (a % b === 0) {
+    return b
   }
-  for (let i = 4; i < Math.sqat(n); i++) {
-    if (number % i === 0) {
-      return false
-    }
-  }
-  return true
+  return arguments.callee(b, a % b)
 }
