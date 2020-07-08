@@ -1,0 +1,296 @@
+面试记录
+## 自我介绍
+- VUE -> REACT
+考量：
+- 增加 React 思想
+- 16 fiber
+- 16.8 高阶组件 hooks
+- 高阶组件代码难以维护
+- hooks 代码比较扁平
+-
+- 表单
+- v-modal
+推动：
+- 其他 team
+- 4 人
+----------------------------
+PC 端
+后台项目，数据可视化
+基础业务组件
+- npm package
+- 维护：
+- 基于 antd 二次封装
+- 4 个大组件：
+- 顶部查询
+- 保证质量
+- 样式方案：css
+
+性能监控平台：
+- 性能监控
+- Ajax 请求
+前端 mock 平台：
+- 基于 easy-mock 修改：数据库的改造
+
+
+## 基础知识
+- HTTP OPTIONS 请求的作用
+- 验证
+- 发送内容
+- 获取内容
+- 什么情况：
+- 跨域：不属于三元组：协议版本、域名、端口 + 非简单请求
+- CDN 资源：不算，因为是简单请求
+- 简单请求：
+
+
+- React
+``` js
+class MyComponent extends Component {
+  someFunc = () => {
+    // this.state.count: 1
+    this.setState({
+      count: this.state.count + 1,
+    })
+    console.log(this.state.count) // ---> ? 1
+
+    this.setState({
+      count: this.state.count + 1,
+    })
+   console.log(this.state.count) // ---> ? 1
+
+    setTimeout(() => {
+     // --------> 2
+      this.setState({
+        count: this.state.count + 1,
+      })
+      console.log(this.state.count) // ---> ? 3
+    }, 0);
+    setTimeout(() => {
+      this.setState({
+        count: this.state.count + 1,
+      })
+      console.log(this.state.count) // ---> ? 3
+    }, 0);
+  }
+  render() {
+    return (...)
+  }
+}
+```
+state []  --> render() {}
+
+1. 实现一个 jsonp
+function jsonp(url, fn, options) {
+callbackId =
+const script = document.createElement('script')
+const scriptSrc = `${url}?callback=${callbackId}`
+Object.keys((key) => {
+scriptSrc+=`&${key}=${params[key]}`
+})
+script.src = scriptSrc
+document.append(script)
+window[callbackId]= fn
+script.onload =
+}
+
+css-loader 与 style-loader  作用
+- css-loader 处理 css
+- style-loader 处理内联样式
+
+import './a.css';
+body {
+  padding: 0;
+}
+
+function fetchAll(urls, maxConcurrent = 5) {
+if(!urls || !urls.length) {
+ return
+}
+
+for (1 =>  maxConcurrent) {
+  fetch().then({
+})
+}
+const stack = []
+function fetchMax(urls) {
+   const promises = urls.map((url) => fetch(url))
+   return Promise.all(promises).then(res => {
+})
+})
+}
+const urlsSplit
+
+}
+
+Hello word
+1. React 虚拟 Dom 的 diff 算法
+同级比较
+首尾交叉算法 key
+
+abcd
+dacb
+
+虚拟 Dom 的作用
+开发效率高
+Vue 1 没有虚拟 Dom
+
+React 16
+Fiber 调度
+Hooks
+为了解决什么问题？
+生命周期管理
+useState 状态
+const [] = useState();
+const [] = useState();
+
+
+
+
+
+class MyComponent extends Component {
+  state = {
+    count = 0,
+  }
+
+  handleClick = async () => {
+    const { count } = this.state;  // count -> 0
+    await fetch(); // some async
+    this.setState({ count: count+1 });
+    console.log('----->', this.state.count);  // count -> 1
+  }
+
+  render() {
+     return (<button onClick={this.handleClick}>AA</button>)
+  }
+}
+
+
+React 事件合成机制
+
+stop
+
+addEventListener
+<div onClick={this.aaa}>
+<button onClick={this.handleClick} ref={} />
+</div>
+
+
+[] == false // true
+"" == false
+0 == 0
+{} == false // false
+"[Object Object]" == false
+1 == 0
+[0] == false // true
+"0" == false
+0 == 0
+[1] == [1] // false
+
+
+
+var name = 'A';
+function log() {
+  console.log(name);
+  let name = 'B'
+}
+log();
+// A
+// A
+// undefined
+// Error
+
+// A
+
+
+js 事件循环机制
+宏 setTimeout
+微任务
+new Promise(() => {
+ console.log(2)
+ setTimeout(() => {
+   console.log(3)
+}, 0)
+ resolve()
+}).then(() => {
+ setTimeout(() => {
+   console.log(4)
+}, 0)
+})
+setTimeout(() => {
+ console.log(1)
+}, 0)
+
+2 3 1
+
+function flat(arr) {
+arr.flat()
+}
+var arrResult = []
+function flat2(arr) {
+arr.forEach((item, index) => {
+if (item.isArray()) {
+flat2(item)
+}  else {
+arrResult.push(item)
+}
+})
+}
+
+
+function flatten(arr) {
+  return arr.reduce((arr, cur) => arr.concat(cur), [])
+}
+
+
+function curry(fn) {
+  // TODO:
+let realLenght = fn.length
+let realArgs = []
+fucntion innerCurry(...args) {
+if(realLength === realArg.lenght) {
+return fn(...realArg)
+} else {
+realArgs = [ ...realArgs, ...args ]
+}
+}
+return innerCurry
+}
+
+
+预期
+function sum(a,b,c) {
+  return a + b + c;
+}
+
+const cSum = curry(sum);
+cSum(1,2,3)  -> 6
+cSum(1)(2)(3) -> 6
+cSum(1)(2,3) -> 6
+
+
+compose
+
+data n  sum
+
+function getResult(data, 2, sum) {
+
+}
+[1,23,4]
+3
+5
+[1,4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
